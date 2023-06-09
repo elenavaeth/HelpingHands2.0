@@ -1,0 +1,389 @@
+/* APP */
+html {
+  height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
+}
+
+
+/* NAVIGATION */
+nav {
+  color: grey;
+  background-color: grey;
+  text-align: center;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: -3px;
+
+  display: flex;
+  flex-basis: auto;
+}
+
+nav li:hover, .nav-link.active {
+  background-color: rgb(220, 220, 220);
+
+  border: 0px solid white;
+  border-bottom-width: 3px;
+
+  color: black;
+}
+
+.nav {
+  flex-wrap: unset;
+  --bs-nav-link-hover-color: black;
+  height: 100px;
+}
+
+.nav-item {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.nav-link {
+  color: #f0f0f0;
+  padding: 5px;
+  padding-top: 20px;
+}
+
+.navbar, .container {
+  padding: 0;
+}
+
+.navbar > .container {
+  padding: 0;
+}
+
+/* HILFSANZEIGEN */
+.hilfsanzeigen-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  background: lightgray;
+}
+
+.logo-picture {
+  display: flex;
+  justify-content: center;
+}
+.logo {
+  width: 125px;
+}
+
+.logo-description {
+  display: flex;
+  justify-content: center;
+  color: #0d0d40;
+  margin-top: -20px;
+}
+
+.logo-description.double {
+  flex-direction: column;
+}
+
+.logo-description-title {
+  display: flex;
+  justify-content: center;
+}
+
+.search {
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius)!important;
+  width: 350px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.form-control {
+  border: none;
+  margin: 0;
+  padding: 10px;
+}
+
+.category-container {
+  margin-top: 10px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.form-select {
+  width: 308px;
+}
+
+.no-entry {
+  font-size: 16px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 350px;
+  margin-top: 10px;
+  background: lightgray;
+  padding: 2px;
+}
+
+.hilfsanzeigen {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  flex-direction: column;
+  height: 450px;
+  margin-top: 10px;
+  overflow: scroll;
+}
+
+.hilfen {
+  display: flex;
+  justify-content: center;
+}
+
+.hilfsanzeigen li {
+  margin: 0;
+
+  background-color: rgba(250, 250, 250, .8);
+
+  border-bottom-width: 1px;
+}
+
+.hilfsanzeigen .titel {
+  padding-left: 5px;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.hilfsanzeigen .beschreibung {
+  padding-left: 5px;
+}
+
+.hilfsanzeigen ul{
+  padding-left: 0;
+  align-content: center;
+  background: lightgray;
+}
+
+.hilfsanzeigen ul li {
+  padding: 2px;
+  display: flex;
+  flex-direction: row;
+  padding-left: 5px;
+}
+
+.zeitpunkt, .standort, .kategorie {
+  width: 80px;
+}
+
+.hilfsanzeigen .actions {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background: lightgray;
+  width: auto
+}
+
+.hilfsanzeigen .actions > div {
+
+  background-color: rgb(220, 220, 220);
+  transition: background-color 0.5s;
+
+  flex: 1;
+  text-align: center;
+
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.action.edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hilfsanzeigen .actions > div:first-child {
+  margin-left: 0;
+}
+
+.hilfsanzeigen .actions > div:last-child {
+  margin-right: 0;
+}
+
+.hilfsanzeigen .actions > div:hover {
+  background-color: darkgray;
+  cursor: pointer;
+}
+
+.hilfsanzeigen ol ul {
+  list-style: none;
+}
+
+.anfrage {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+
+}
+
+/* LOGIN */
+
+.logo-picture{
+
+  margin: 0 auto;
+  text-align: center;
+
+}
+.logo {
+  width: 125px;
+  margin-top: 0;
+  background-position: top;
+}
+
+.login-page, .login-form, .register-form {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+}
+.login-page{
+  padding: 0;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  margin: 0 auto;
+}
+input {
+  margin: 0.5rem ;
+  padding: 1rem;
+  border:rgb(9, 9, 9);
+  border-radius: 10px;
+  background-color: rgb(236, 237, 238);
+}
+button {
+  margin: 10px;
+  background-color: rgb(167, 192, 246);
+  border: rgb(9, 9, 9);
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #ffffff;
+}
+.link-btn {
+  background: none;
+  color: rgb(10, 10, 10);
+  text-decoration: underline;
+  margin:0;
+}
+label {
+  text-align: left;
+  padding: 0.25rem 0;
+}
+
+/* Registrieren */
+.registrieren-page{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  margin: 20px;
+}
+
+/* Konto */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+.header {
+  margin-bottom: 20px;
+}
+
+.box-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.box{
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  flex-basis: calc(50% - 5px);
+
+}
+
+h1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+h2 {
+  margin-top: 10px; /* Füge etwas Abstand oberhalb der kleinen Überschrift hinzu */
+}
+
+/* Anzeige erstellen */
+
+.helping-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.helping-form > div {
+  width: 325px;
+}
+
+.title-input, .description-input {
+  width: 308px;
+}
+
+.place-input, .time-input {
+  width: 150px;
+}
+
+.time-input {
+  margin-left: 0;
+}
+
+.description-input {
+  height: 150px;
+}
+
+.form-select.category {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.submit-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

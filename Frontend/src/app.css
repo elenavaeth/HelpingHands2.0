@@ -1,0 +1,114 @@
+/**
+ * Stylesheet zur Klasse App: Hauptstylesheet der Anwendung.
+ *
+ * Hier stehen nur allgemeine Sachen, die das Layout als Ganzes
+ * betreffen. Also solche Dinge wie Schriftart, Schriftgrößen oder Farben.
+ * Spezifische Angaben zur Listenübersicht oder dem Eingabeformular gehören
+ * stattdessen in das jeweilige Stylesheet.
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Rubik');
+
+/* ALLGEMEINES */
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-family: Tahoma, sans-serif;
+  font-size: 12pt;
+  line-height: 1.6;
+  background: rgba(242, 242, 242);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Titel der Seite */
+.titel h3 {
+  text-align: center;
+  font-family: 'Brush Script MT', cursive;
+  font-size: 35pt;
+  color: black;
+  border-top: 3px solid rgb(245, 213, 181);
+  border-bottom: 3px solid rgb(245, 213, 181);
+}
+
+@media (min-width: 40em) {
+  html {
+    background-color: rgb(245, 213, 181);
+    background-image: url(img/background.jpg);
+    background-repeat: no-repeat;
+    background-size: auto;
+    font-size: 11pt;
+  }
+
+  body {
+    max-width: 70em;
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  .titel h3 {
+    text-align: center;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 40pt;
+    color: grey;
+    border-top: 5px solid rgb(245, 213, 181);
+    border-bottom: 5px solid rgb(245, 213, 181);
+  }
+
+}
+
+/* NAVIGATION */
+nav {
+  color: grey;
+  background-color: grey;
+  text-align: center;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: -3px;
+
+  display: flex;
+  flex-basis: auto;
+}
+
+nav li:hover {
+  background-color: rgb(220, 220, 220);
+
+  border: 0px solid white;
+  border-bottom-width: 3px;
+
+  color: black;
+}
+
+.nav {
+  flex-wrap: unset;
+  --bs-nav-link-hover-color: black;
+}
+
+.nav-item {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.nav-link {
+  color: #f0f0f0;
+}
+
+.navbar, .container {
+  padding: 0;
+}
+

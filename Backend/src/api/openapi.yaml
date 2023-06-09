@@ -1,0 +1,606 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: HelpingHands
+  description: 'Die HelpingHands-WebApp nutzt einen REST-Webservices zur Kommunikation mit dem Backend. Dieser ermöglicht die üblichen CRUD-Operationen zur Suche, Anzeige und Bearbeitung von Hilfsanzeigen, wobei jede Hilfsanzeige aus einer Beschreibung besteht.'
+  contact:
+    name: 'Angelika Kleimann, Ayse Nur Kocak, Elena Väth, Marco Pelzer, Rebecca Piotrowski, Jonas Prions'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /:
+    get:
+      tags:
+        - Index
+      summary: Wurzeladresse des Webservices
+      description: HATEAOS-Links mit den Collections abrufen
+      operationId: get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HATEOAS_Collection'
+      servers:
+        - url: 'http://localhost:3000'
+  /hilfsanzeige:
+    get:
+      tags:
+        - Hilfsanzeigenliste
+      summary: Hilfsanzeige suchen
+      description: Suche nach Hilfsanzeigen. Gibt eine Liste aller Hilfsanzeigen passend zu den übergebenen Suchkriterien zurück.
+      operationId: get-hilfsanzeige
+      parameters:
+        - name: titel
+          in: query
+          description: Gesuchter Titel
+          schema:
+            type: string
+        - name: beschreibung
+          in: query
+          description: Gesuchte Beschreibung
+          schema:
+            type: string
+        - name: kategorie
+          in: query
+          description: Gesuchte Kategorie
+          schema:
+            type: string
+        - name: zeitraum
+          in: query
+          description: Gesuchter Zeitraum
+          schema:
+            type: string
+        - name: standort
+          in: query
+          description: Gesuchter Standort
+          schema:
+            type: string
+        - name: nutzername
+          in: query
+          description: Gesuchter Nutzername
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Hilfsanzeige'
+      servers:
+        - url: 'http://localhost:3000'
+    post:
+      tags:
+        - Hilfsanzeigenliste
+      summary: Hilfsanzeige anlegen
+      description: 'Neue Hilfsanzeige anlegen. Speichert die übergebene Hilfsanzeige in der Datenbank. Der Wert des Feldes "_id" wird dabei ignoriert, da in jedem Fall eine neue Adresse mit neuer id angelegt wird.'
+      operationId: post-hilfsanzeige
+      requestBody:
+        description: Daten des anzulegenden Hilfsanzeige
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hilfsanzeige'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hilfsanzeige'
+          headers:
+            Location:
+              schema:
+                type: string
+              description: URL des angelegten Datensatzes
+      servers:
+        - url: 'http://localhost:3000'
+  '/hilfsanzeige/{id}':
+    get:
+      tags:
+        - Hilfsanzeige
+      summary: Hilfsanzeige lesen
+      description: Listet eine einzelne Hilfsanzeige vom Server
+      operationId: get-hilfsanzeige-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hilfsanzeige'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+      servers:
+        - url: 'http://localhost:3000'
+    put:
+      tags:
+        - Hilfsanzeige
+      summary: Hilfsanzeige überschreiben
+      description: 'Hilfsanzeige bearbeiten. Es könne alle Felder geändert werden, mit Ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
+      operationId: put-hilfsanzeige-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hilfsanzeige'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hilfsanzeige'
+        '404':
+          description: Not Found
+      servers:
+        - url: 'http://localhost:3000'
+    patch:
+      tags:
+        - Hilfsanzeige
+      summary: Einzelne Felder ändern
+      description: 'Hilfsanzeige bearbeiten. Es könne alle Felder geändert werden, mit Ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
+      operationId: patch-hilfsanzeige-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hilfsanzeige'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hilfsanzeige'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+      servers:
+        - url: 'http://localhost:3000'
+    delete:
+      tags:
+        - Hilfsanzeige
+      summary: Hilfsanzeige entfernen
+      description: Löschen der Hilfsanzeige
+      operationId: delete-hilfsanzeige-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+      servers:
+        - url: 'http://localhost:3000'
+  /angebot:
+    get:
+      tags:
+        - Angebotsliste
+      summary: Angebotene Hilfe einsehen
+      description: 'Neues Angebot anlegen. Speichert die übergebene Hilfsanzeige in der Datenbank. Der Wert des Feldes "_id" wird dabei ignoriert, da in jedem Fall eine neue Adresse mit neuer id angelegt wird.'
+      operationId: get-angebot
+      parameters:
+        - name: titel
+          in: query
+          description: Titel der Hilfsanzeige
+          schema:
+            type: string
+        - name: standort
+          in: query
+          description: Gesuchter Standort
+          schema:
+            type: string
+        - name: ersteller
+          in: query
+          description: Gesuchter Ersteller
+          schema:
+            type: string
+        - name: nutzername
+          in: query
+          description: Gesuchter Nutzername
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Angebot'
+      servers:
+        - url: 'http://localhost:3000'
+    post:
+      tags:
+        - Angebotsliste
+      summary: Zur Liste hinzufügen
+      operationId: post-angebot
+      requestBody:
+        description: Daten des anzulegenden Angebots
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Angebot'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Angebot'
+          headers:
+            Location:
+              schema:
+                type: string
+              description: URL des Datensatzes
+      servers:
+        - url: 'http://localhost:3000'
+  '/angebot/{id}':
+    get:
+      tags:
+        - Angebot
+      summary: Angebot lesen
+      description: Angebot einsehen
+      operationId: get-angebot-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Angebot'
+        '404':
+          description: Not Found
+      servers:
+        - url: 'http://localhost:3000'
+  /benutzer:
+    get:
+      tags:
+        - Benutzerliste
+      summary: Benutzer sehen
+      description: Benutzer einsehen
+      operationId: get-benutzer
+      parameters:
+        - name: vorname
+          in: query
+          description: Gesuchter Vorname
+          schema:
+            type: string
+        - name: nachname
+          in: query
+          description: Gesuchter Nachname
+          schema:
+            type: string
+        - name: straße
+          in: query
+          description: Gesuchte Straße
+          schema:
+            type: string
+        - name: hausnummer
+          in: query
+          description: Gesuchte Hausnummer
+          schema:
+            type: string
+        - name: postleitzahl
+          in: query
+          description: Gesuchte Postleitzahl
+          schema:
+            type: string
+        - name: stadt
+          in: query
+          description: Gesuchte Stadt
+          schema:
+            type: string
+        - name: email
+          in: query
+          description: Gesuchte Email
+          schema:
+            type: string
+        - name: telefon
+          in: query
+          description: Gesuchte Telefonnummer
+          schema:
+            type: string
+        - name: nutzername
+          in: query
+          description: Gesuchter Nutzername
+          schema:
+            type: string
+        - name: passwort
+          in: query
+          description: Gesuchtes Passwort
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Benutzer'
+      servers:
+        - url: 'http://localhost:3000'
+    post:
+      tags:
+        - Benutzerliste
+      summary: Benutzer anlegen
+      description: 'Neuen Benutzer anlegen. Speichert den übergebenen Benutzer in der Datenbank. Der Wert des Feldes "_id" wird dabei ignoriert, da in jedem Fall eine neue Adresse mit neuer id angelegt wird.'
+      operationId: post-benutzer
+      requestBody:
+        description: Daten des anzulegenden Benutzers
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Benutzer'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Benutzer'
+          headers:
+            Location:
+              schema:
+                type: string
+              description: URL des angelegten Datensatzes
+      servers:
+        - url: 'http://localhost:3000'
+  '/benutzer/{id}':
+    get:
+      tags:
+        - Benutzer
+      summary: Benutzer sehen
+      description: Benutzer von Server lesen
+      operationId: get-benutzer-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Benutzer'
+        '404':
+          description: Not Found
+      servers:
+        - url: 'http://localhost:3000'
+    put:
+      tags:
+        - Benutzer
+      summary: Benutzer überschrieben
+      description: 'Benutzer bearbeiten. Es könne alle Felder geändert werden, mit Ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
+      operationId: put-benutzer-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Benutzer'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Benutzer'
+        '404':
+          description: Not Found
+      servers:
+        - url: 'http://localhost:3000'
+    patch:
+      tags:
+        - Benutzer
+      summary: Einzelne Felder ändern
+      description: 'Benutzer bearbeiten. Es könne alle Felder geändert werden, mit Ausnahme der id des Datensatzes. Der Versuch, die id zu ändern, wird vom Server stillschweigend ignoriert.'
+      operationId: patch-benutzer-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Benutzer'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Benutzer'
+        '404':
+          description: Not Found
+      servers:
+        - url: 'http://localhost:3000'
+    delete:
+      tags:
+        - Benutzer
+      summary: Benutzer löschen
+      description: Benutzer löschen
+      operationId: delete-benutzer-id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+      servers:
+        - url: 'http://localhost:3000'
+tags:
+  - name: Benutzer
+  - name: Benutzerliste
+  - name: Hilfsanzeige
+  - name: Hilfsanzeigenliste
+  - name: Angebot
+  - name: Angebotsliste
+  - name: Index
+components:
+  schemas:
+    HATEOAS_Collection:
+      type: object
+      title: HATEOAS_Collection
+      description: HATEOAS-Links einer Collection
+      properties:
+        _name:
+          type: string
+        query:
+          $ref: '#/components/schemas/HATEOAS_Link'
+        create:
+          $ref: '#/components/schemas/HATEOAS_Link'
+    HATEOAS_Link:
+      type: object
+      title: HATEOAS_Link
+      description: HATEOAS-Link
+      properties:
+        url:
+          type: string
+        method:
+          type: string
+        query_params:
+          type: array
+          items:
+            type: string
+    Hilfsanzeige:
+      type: object
+      title: Hilfsanzeige
+      description: Hilfsanzeige
+      properties:
+        _links:
+          $ref: '#/components/schemas/HATEAOS_Resource'
+        _id:
+          type: string
+        titel:
+          type: string
+        beschreibung:
+          type: string
+        kategorie:
+          type: string
+        zeitraum:
+          type: string
+        standort:
+          type: string
+        nutzername:
+          type: string
+    HATEAOS_Resource:
+      type: object
+      title: HATEAOS_Resource
+      description: HATEAOS-Links einer Ressource
+      properties:
+        read:
+          $ref: '#/components/schemas/HATEOAS_Link'
+        update:
+          $ref: '#/components/schemas/HATEOAS_Link'
+        patch:
+          $ref: '#/components/schemas/HATEOAS_Link'
+        delete:
+          $ref: '#/components/schemas/HATEOAS_Link'
+    Angebot:
+      type: object
+      title: Angebot
+      description: Liste der angebotenen Hilfen.
+      properties:
+        _id:
+          type: string
+        titel:
+          type: string
+        standort:
+          type: string
+        ersteller:
+          type: string
+        nutzername:
+          type: string
+    Benutzer:
+      type: object
+      title: Benutzer
+      description: Benutzer
+      properties:
+        _links:
+          $ref: '#/components/schemas/HATEAOS_Resource'
+        _id:
+          type: string
+        vorname:
+          type: string
+        nachname:
+          type: string
+        straße:
+          type: string
+        hausnummer:
+          type: string
+        postleitzahl:
+          type: string
+        stadt:
+          type: string
+        email:
+          type: string
+        telefon:
+          type: string
+        nutzername:
+          type: string
+        passwort:
+          type: string

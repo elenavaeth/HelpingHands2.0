@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+        <!-- Mit esbuild erzeugte Bundles aus allen JS/CSS-Dateien -->
+        <script src="app.js" type="module"></script>
+        <link rel="stylesheet" href="app.css" />
+
+        <!-- Dummy-Element für dynamisch nachgeladene CSS-Anweisungen -->
+        <style id="page-css"></style>
+
+        <!-- https://pixabay.com/vectors/muffin-cupcake-sweet-cake-dessert-297396/ -->
+        <link rel="shortcut icon" href="HelpingHandsFavicon.png" />
+
+
+    </head>
+
+    <body>
+        <!-- Navbar mit Tabreitern zur Navigation auf der Seite -->
+        <nav class ="navbar fixed-bottom" id="app-menu">
+            <div class="container">
+                <div>
+                    <ul class="nav">
+                        <li class="nav-item" data-page-name="listr">
+                            <a class="nav-link active" href="#">Ich möchte Menschen helfen</a>
+                        </li>
+                        <li class="nav-item" data-page-name="newr">
+                            <a class="nav-link" href="#">Ich brauche Hilfe</a>
+                        </li>
+                        <li class="nav-item" data-page-name="listb">
+                            <a class="nav-link" href="#">Mein Konto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!--
+            Der Inhalt der aktuellen Seite wird hier mit JavaScript
+            zur Laufzeit als <main>-Element eingebunden.
+        -->
+
+    </body>
+
+</html>
